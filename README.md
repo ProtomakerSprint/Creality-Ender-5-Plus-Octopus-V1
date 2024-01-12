@@ -1,0 +1,45 @@
+# Creality Ender 5 Plus
+#
+# Marlin-2.1.2.1 NOT USED INPUT_SHAPING OPTION in Configuration_adv.h
+#
+# Bigtree Tech Octopus VI.1 STM32F446ZET6 chip
+#
+# BBT TF35 Dual display
+#
+# BLTouch, POWER_LOSS_RECOVERY, Servo Nozzle wiper arm
+# 	Ula.g.xjbXVeqiid 1
+# Using the New Servo, this resolved the jitter issue...
+# TowerPro SG5010 Digital Servo Motor 5.5kg/cm 4.8V 180 Futaba
+# Flux Workshop eBay seller : fluxworkshop
+#
+# NOTE The Servo voltage is 4 to 6 Volts input. The Servo signal pin to Endstop Pin ( PG15 ).
+# Then I wire the power to 5 Volts FAN7+ (fan voltage set to 5 volts
+# using jumper 366). 3.3 Volts from Endstop sometimes seems to stick Servo in position, intermittently
+#
+# I find that adding a capicitor, ( 1000uF 50 Volt low ESR Electrolytic capacitor ) in parallel with the 5 Volt input to the Servo has helped prevent the Servo sticking in position, intermittently
+#
+# Servo to move 3D Printed arm that wipe ooze from the nozzle
+#
+# Electrical Spikes maybe an issue: Servomotor protection circuit test. A diode may fix this issue
+# https://youtu.be/IierWEZ0SKU via @YouTube #
+# I placed a 1000uF 50 Volt low ESR Electrolytic capacitor across the 5 Volt supply supply to my servo and after about 12x 3D prints I've had no further issues of control board shutting down
+#
+#
+#*** NOTE Compile as ABM Panel : Environment STM32F446ZE_btt(512K) Architecture : Stm32f4 Re: STM32F446ZET6 chip
+#
+#*** NOTE platformio.ini needs setting  BOARD_BTT_OCTOPUS_V1_1 
+#
+#*** NOTE Architecture : Stm32f4 Re: STM32F446ZET6 chip   BOARD_BTT_OCTOPUS_V1_1  
+#
+#*** NOTE \Marlin\src\pins\stm32f4\pins_BTT_0CT0PUS_Vl_common.h pins_BTT_OCTOPUS_Vl_common.h Pins need changing for Nozzle Wipe via Servo.
+#
+#*** NOTE Marlin\src\module\temparture.cpp temperature.cpp M190 R wait for Heat Bed to cool down fix. Changed for cool down Heat Bed sounds.
+#
+# Driver chips I use TMC2208, no sensorless
+#
+# Helpful video BTT Octopus VI.1 - Basics
+# https://youtu.be/ATu_XkyDI3I
+#
+# Your printer's firmware is a development build of Marlin (build date 20231209). It might be more unstable than a release version and should be kept up-to-date.
+#
+#*/
