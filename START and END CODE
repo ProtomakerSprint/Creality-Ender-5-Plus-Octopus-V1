@@ -1,0 +1,225 @@
+; START GCODE
+
+; Creality Servo driven nozzle wiper arm
+
+; Using a servo on a Creality Ender 5 Plus with the BLTouch...
+
+; Using Servo to Wipe the Nozzle Clean
+; and an arm to catch any Oozed filament
+; The Wiper wipes the Nozzle forwards and backwards
+
+; You still required to remove the caught ooze from the silicone, brush and tray after the 3D Print before the next print
+
+; This G-Code should be placed in the Start Code, G Code BUT watch out for where your
+; Slicer places Temperatures, which I set the Hot End to 210 C for PLA
+
+; All these setting are good for my Servo, Wiper Arm, Filament, and 3D Printer, etc. ONLY : Creality Ender 5 Plus
+;
+; NOTE silicone has a high Temperature of 240 C
+
+; I use a piece of silicone baking sheet cut to size and the cut slits partway to form a brush.
+
+; I also use the brass wire brush end of a golf ball cleaning brush.
+
+; This Wiper silicone brush and brass wire brush should brush over the tip of the Nozzle, forwards and backwards
+
+; Tray on Nozzle Wiper. To try to collected wiped filament.
+
+; Reset Extruder. Any pervious feeding may cause the feeder to feed backwards otherwise
+; G92 Ennn new extruder Position
+G92 E0; G92 - Set Position
+
+; Start
+
+; make sure Bed cooling fan is turend off
+
+M107 P1 ; Turn Bed Cooling Fans off
+
+; Just to make sure wiper arn is clear of raising bed.
+M280 P1 S0; Nozzle Wipe Start Position at back of the printer
+; Double check
+M280 P1 S0; Nozzle Wipe Start Position at back of the printer
+
+;Message
+M117 Leveling Routines
+
+; BLTouch Probe
+G28 ; Home all axes.
+
+M420 S1; After G28 Home. Level, use the mesh. M420 S1 Z Height to use
+
+; Clean the Nozzle
+
+; Message
+M117 Clean nozzle
+
+; Move nozzle to wipe position
+G1 Z 50 F1500; Move bed down to clear space for nozzle wipe
+G1 X 90 F6500; X Position
+G1 Y 335 F5500; Y Position, towards the back
+
+; Pause for two second to wait Nozzle movements before wiping
+; Dwell command millisconds G4 P60000 is one minute
+G4 P2000
+
+; Start Wiping routine
+
+M280 P1 S0; Nozzle Wipe Start Position at back of the printer Tripple check
+
+M280 P1 S40; Move just before nozzle
+
+; Dwell command millisconds G4 P60000 is one minute
+G4 P500
+
+M280 P1 S95; Nozzle Wipe just after the nozzle
+
+; Dwell command millisconds G4 P60000 is one minute
+G4 P500
+
+M280 P1 S40; Move just before nozzle
+
+; Dwell command millisconds G4 P60000 is one minute
+G4 P500
+
+M280 P1 S95; Nozzle Wipe just after the nozzle
+
+; Dwell command millisconds G4 P60000 is one minute
+G4 P500
+
+M280 P1 S40; Move just before nozzle
+
+; Dwell command millisconds G4 P60000 is one minute
+G4 P500
+
+M280 P1 S95; Nozzle Wipe just after the nozzle
+
+; Dwell command millisconds G4 P60000 is one minute
+G4 P500
+
+M280 P1 S40; Move just before nozzle
+
+; Dwell command millisconds G4 P60000 is one minute
+G4 P500
+
+M280 P1 S95; Nozzle Wipe just after the nozzle
+
+; Dwell command millisconds G4 P60000 is one minute
+G4 P500
+
+M280 P1 S0; Nozzle Wipe Start Position at back of the printer
+
+; Double check
+M280 P1 S0; Nozzle Wipe Start Position at back of the printer
+
+M282 P1; Detach Servo, Turn off the sevo power. May save a small amount of power. Allow servo, wipe are to be moved
+
+; Pause for 1/2 second to wait wiper movements before moving bed up;
+; Just to make sure wiper arm is clear of raising bed.
+; Dwell command millisconds G4 P60000 is one minute
+G4 P500
+
+;
+;################################################################################
+; Mark Printer started position in GCode. Easier to see in Gcode
+;
+; Printing started
+;
+;################################################################################
+;
+
+G29 ; Autolevel the Print bed.
+
+; NB the default loading- and unloading procedure does
+; not behave as expected. Setting the extruder to relative mode fixes this.
+; https://github.com/Klipper3d/klipper/commit/6ccc0732c119e9f92c714c4542d760ea77bcbfdd
+; The M603 command configures automatic filament change parameters.
+; Example M603 U1700 L600  // START GCODE Unload/Load. Also possible to define which nozzle used
+; Marlin 2.0 M600 Filament change setup explained
+; https://www.crosslink.io/2020/07/17/marlin-2-0-m600-filament-change-setup-explained/
+
+; Filament Runout commend, see above
+M603 U1700 L600
+
+; Message
+M117  Printing started
+
+
+##########################################################################################
+******************************************************************************************
+##########################################################################################
+
+ END CODE
+
+G92 E0 ; Just reset the Extruder axis:
+G1 E -4 F1800 ; and move it backward:  (here, 4mm, at 30mm/s). Example E3D-v6.  Oozing try to stop problem retract a bit. (2mm is maximun for E3D-v6.)
+M104 S0 ; turn off temperature
+M104 S0 ; make sure the extuder is turned off.
+M106 P1 ; Turn Bed Cooling Fans on
+; DO NOT home all axes, probe above printed part
+G1 Z180 F250 X 15 F1500 ;  Move Up and Left together. To try to stop problems of oozin and out the way for easier access to printed part for removel. Keep BLTouch Pin away from Z Carriage brackets
+G0 Y350 F15000 ; move nozzle towards back to remove printed object
+M84  ; disable motors
+;Play Pink Panther
+;M300 S{pitch in hz} P{duration in ms}
+;PinkPanther
+M300 S1244 P187
+M300 S1318 P187
+M300 S0 P750
+M300 S1479 P187
+M300 S1567 P187
+M300 S0 P750
+M300 S1244 P187
+M300 S1318 P187
+M300 S0 P93
+M300 S1479 P187
+M300 S1567 P187
+M300 S0 P93
+M300 S2093 P187
+M300 S987 P187
+M300 S0 P93
+M300 S1244 P187
+M300 S1318 P187
+M300 S0 P93
+M300 S987 P187
+M300 S932 P750
+M300 S0 P750
+M300 S880 P93
+M300 S1567 P93
+M300 S1318 P93
+M300 S1174 P93
+M300 S1318 P750
+;; Wait for Heat Bed to cool down to 32 C
+;; Part removal Temperature
+M400; Wait for other commands to finish
+M190 R32; Seems to go at 54C and not 32C : (R instead of S wait for this Temperature
+M140 S0 ; make sure the bed is turned off.
+M107 P1 ; Turn Bed Cooling Fans off
+;Play Indiana
+;M300 S{pitch in hz} P{duration in ms}
+;Indiana
+M300 S1318 P240
+M300 S0 P120
+M300 S1396 P120
+M300 S1567 P120
+M300 S0 P120
+M300 S2093 P960
+M300 S0 P120
+M300 S1174 P240
+M300 S0 P120
+M300 S1318 P120
+M300 S1396 P960
+M300 S0 P240
+M300 S1567 P240
+M300 S0 P120
+M300 S880 P120
+M300 S987 P120
+M300 S0 P120
+M300 S2793 P960
+M300 S0 P240
+M300 S880 P240
+M300 S0 P120
+M300 S987 P120
+M300 S2093 P480
+M300 S2349 P480
+M300 S2637 P480
+
