@@ -1,0 +1,7 @@
+// NB the default loading- and unloading procedure does
+// not behave as expected. Setting the extruder to relative mode fixes this.
+// https://github.com/Klipper3d/klipper/commit/6ccc0732c119e9f92c714c4542d760ea77bcbfdd
+// The M603 command configures automatic filament change parameters.
+// Example M603 U1700 L600  // START GCODE Unload/Load. Also possible to define which nozzle used
+// Marlin 2.0 M600 Filament change setup explained
+// https://www.crosslink.io/2020/07/17/marlin-2-0-m600-filament-change-setup-explained/
