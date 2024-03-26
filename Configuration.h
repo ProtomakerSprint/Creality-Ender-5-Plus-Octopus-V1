@@ -1946,13 +1946,17 @@
 //#define ENABLE_LEVELING_AFTER_G28
 
 /**
+ * DO NOT USE THIS. CHANGES THE TEMPS TO THIS for the 3D Printing
+ * 
+ * 
  * Auto-leveling needs preheating
- */
+ 
 #define PREHEAT_BEFORE_LEVELING // Protomaker Sprint
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
-  #define LEVELING_NOZZLE_TEMP 200   // Protomaker Sprint (°C) Only applies to E0 at this time
+  #define LEVELING_NOZZLE_TEMP 210   // Protomaker Sprint (°C) Only applies to E0 at this time
   #define LEVELING_BED_TEMP     60   // Protomaker Sprint
 #endif
+*/
 
 /**
  * Bed Distance Sensor
